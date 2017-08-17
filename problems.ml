@@ -10,6 +10,8 @@ let rec last = function
 assert (last [1;2;3;4;5;6] = Some 6);;
 assert (last [] = None);;
 
+print_char '.';;
+
 (* Problem 2 *)
 let rec last_two = function
 	| [] -> None
@@ -22,6 +24,8 @@ assert (last_two [1;2;3;4;5] = Some (4, 5));;
 assert (last_two [] = None);;
 assert (last_two [1] = None);;
 
+print_char '.';;
+
 (* Problem 3 *)
 let rec at k = function
 	| [] -> None
@@ -32,6 +36,8 @@ assert (at 0 [1;2;3;4] = Some 1);;
 assert (at 7 [1;2] = None);;
 assert (at 3 [] = None);;
 
+print_char '.';;
+
 (* Problem 4 *)
 let length l =
 	let rec _length acc = function
@@ -41,6 +47,8 @@ let length l =
 
 assert (length [1;2;3;4] = 4);;
 assert (length [] = 0);;
+
+print_char '.';;
 
 (* Problem 5 *)
 
@@ -53,12 +61,16 @@ let rev list =
 assert (rev [1;2;3] = [3;2;1]);;
 assert (rev [] = []);;
 
+print_char '.';;
+
 (* Problem 6 *)
 
 let is_palindrome l =
 	l = rev l;;
 
 assert (is_palindrome ['x';'a';'m';'a';'x']);;
+
+print_char '.';;
 
 (* Problem 7 *)
 type 'a node =
@@ -75,6 +87,8 @@ let flatten l =
 
 assert (flatten [ One "a" ; Many [ One "b" ; Many [ One "c" ; One "d" ] ; One "e" ] ] = ["a";"b";"c";"d";"e"]);;
 
+print_char '.';;
+
 (* Problem 8 *)
 let rec compress = function
 	| a :: ( b :: _ as t) -> if a = b then compress t else a :: compress t
@@ -82,6 +96,8 @@ let rec compress = function
 
 
 assert (compress ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"] = ["a";"b";"c";"a";"d";"e"]);;
+
+print_char '.';;
 
 (* Problem 9 *)
 
@@ -97,6 +113,8 @@ let pack list =
 
 assert (pack ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"d";"e";"e";"e";"e"] = [["a"; "a"; "a"; "a"]; ["b"]; ["c"; "c"]; ["a"; "a"]; ["d"; "d"];["e"; "e"; "e"; "e"]]);;
 
+print_char '.';;
+
 (* Problem 10 *)
 
 let encode list =
@@ -111,6 +129,8 @@ let encode list =
 	in rev (_encode 0 [] list);;
 
 assert (encode ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"] = [(4, "a"); (1, "b"); (2, "c"); (2, "a"); (1, "d"); (4, "e")]);;
+
+print_char '.';;
 
 (* Problem 11 *)
 
@@ -137,6 +157,8 @@ let encode list =
 
 assert (encode ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"] = [Many (4, "a"); One "b"; Many (2, "c"); Many (2, "a"); One "d"; Many (4, "e")]);;
 
+print_char '.';;
+
 (* Problem 12 *)
 
 let rec many acc n x =
@@ -154,6 +176,8 @@ let decode list =
 	in rev (_decode [] list);;
 
 assert (decode [Many (4,"a"); One "b"; Many (2,"c"); Many (2,"a"); One "d"; Many (4,"e")] = ["a"; "a"; "a"; "a"; "b"; "c"; "c"; "a"; "a"; "d"; "e"; "e"; "e"; "e"]);;
+
+print_char '.';;
 
 (* Problem 13 *)
 
@@ -173,6 +197,8 @@ let encode list =
 
 assert (encode ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"] = [Many (4, "a"); One "b"; Many (2, "c"); Many (2, "a"); One "d"; Many (4, "e")]);;
 
+print_char '.';;
+
 (* Problem 14
    Duplicate elements of a list *)
 
@@ -184,6 +210,8 @@ let duplicate list =
 
 assert (duplicate ['a';'a'] = ['a';'a';'a';'a']);;
 assert (duplicate ["a";"b";"c"] = ["a";"a";"b";"b";"c";"c"]);;
+
+print_char '.';;
 
 (* Problem 15 *)
 
@@ -200,7 +228,9 @@ let replicate list n =
 
 	rev (_replicate [] list);;
 
-assert (replicate ["a";"b";"c"] 3 = ["a";"a";"a";"b";"b";"b";"c";"c";"c"])
+assert (replicate ["a";"b";"c"] 3 = ["a";"a";"a";"b";"b";"b";"c";"c";"c"]);;
+
+print_char '.';;
 
 (* Problem 16 *)
 
@@ -216,4 +246,62 @@ let drop list n =
 
   rev (_drop [] 1 list);;
 
-assert (drop ["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"] 3 = ["a"; "b"; "d"; "e"; "g"; "h"; "j"])
+assert (drop ["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"] 3 = ["a"; "b"; "d"; "e"; "g"; "h"; "j"]);;
+
+print_char '.';;
+
+(* Problem 17 *)
+
+let split list n =
+
+  let rec _split acc i = function
+    | [] -> (rev acc, [])
+    | x :: xs ->
+      if i = n then
+        (rev (x :: acc), xs)
+      else
+        _split (x :: acc) (i+1) xs in
+
+  _split [] 1 list;;
+
+assert (split ["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"] 3 = (["a"; "b"; "c"], ["d"; "e"; "f"; "g"; "h"; "i"; "j"]));;
+assert (split ["a";"b";"c";"d"] 5 = (["a"; "b"; "c"; "d"], []));;
+
+print_char '.';;
+
+(* Problem 18 *)
+
+let slice list a b =
+
+  let rec _slice i acc = function
+    | [] -> acc
+    | x :: xs ->
+      if i < a || i > b then
+        _slice (i+1) acc xs
+      else
+        _slice (i+1) (x :: acc) xs in
+
+  rev (_slice 0 [] list);;
+
+assert (slice ["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"] 2 6 = ["c"; "d"; "e"; "f"; "g"]);;
+
+print_char '.';;
+
+(* Problem 19 *)
+
+let rotate list n =
+  let len = List.length list in
+  let n = if len = 0 then 0 else (n mod len + len) mod len in
+  if n = 0 then list
+  else
+    let a, b = split list n in b @ a;;
+
+assert (rotate [1;2] 1 = [2;1]);;
+assert (rotate [1;2;3] 2 = [3;1;2]);;
+assert (rotate [1;2;3] 3 = [1;2;3]);;
+assert (rotate [1;2;3] 4 = [2;3;1]);;
+assert (rotate [1;2;3;4;5;6;7] 4 = [5;6;7;1;2;3;4]);;
+
+print_char '.';;
+
+print_string "\nAll tests passed!\n";;
