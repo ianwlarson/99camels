@@ -452,10 +452,20 @@ let group list sizes =
           aux (n @ acc2) t
       in
       aux [] clist
-                      (*
-                        | (h1, h2) :: t -> _group (h1::acc) h2 ys*)
+
   in
   rev (_group [] list sizes);;
+
+(* True of each element in the list appears twice. *)
+let double_check list =
+
+  let _dc = function
+    | [] -> true
+    | [x] -> false
+    | x :: xs -> false in
+  (* make a find and remove function *)
+
+  list;;
 
 
 let test_list = [[["a"; "b"]; ["c"]]; [["a"; "c"]; ["b"]]; [["b"; "c"]; ["a"]];
