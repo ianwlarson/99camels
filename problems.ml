@@ -441,9 +441,9 @@ let group list sizes =
 
   let rec _group acc lst szs =
     match (lst, szs) with
-    | ([], _) -> acc
-    | (_, []) -> acc
-    | (xs, y::ys) ->
+    | ([], _) -> [rev acc]
+    | (_, []) -> [rev acc]
+    | (xs, y::ys) -> (* xs is the passed in list, y is the partition number, ys is the partition list *)
       let clist = combos y xs in
       let rec aux acc2 = function
         | [] -> acc2
@@ -462,7 +462,7 @@ let test_list = [[["a"; "b"]; ["c"]]; [["a"; "c"]; ["b"]]; [["b"; "c"]; ["a"]];
                  [["a"; "b"]; ["d"]]; [["a"; "c"]; ["d"]]; [["b"; "c"]; ["d"]];
                  [["a"; "d"]; ["b"]]; [["b"; "d"]; ["a"]]; [["a"; "d"]; ["c"]];
                  [["b"; "d"]; ["c"]]; [["c"; "d"]; ["a"]]; [["c"; "d"]; ["b"]]] in
-group ["a";"b";"c";"d"] [2];;
+group ["a";"b";"c";"d"] [2;1];;
 
 print_char '.'; flush stdout;;
 
